@@ -1,5 +1,9 @@
 // Copyright 2006 Nemanja Trifunovic
 
+/***************************************************************************
+ *  NOTICE: I have changed the extension from .h to .hpp
+ ***************************************************************************/
+
 /*
 Permission is hereby granted, free of charge, to any person or organization
 obtaining a copy of the software and accompanying documentation covered by
