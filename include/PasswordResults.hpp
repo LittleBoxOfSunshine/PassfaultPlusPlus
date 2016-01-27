@@ -5,19 +5,19 @@
 #ifndef PASSFAULT_PASSWORDRESULT_HPP
 #define PASSFAULT_PASSWORDRESULT_HPP
 
-/**
- * This interface represents a collection of discovered password patterns. It is passed to pattern finders and is used
- * to store patterns during analysis. Listeners can be notified of when analysis is complete or even when new finders
- * are found.
- *
- * @author Ranind
- */
+#include "PathCost.hpp"
+#include "PasswordPattern.hpp"
 
 namespace Passfault {
 
-    class {
-
-    protected:
+    /**
+     * This interface represents a collection of discovered password patterns. It is passed to pattern finders and is used
+     * to store patterns during analysis. Listeners can be notified of when analysis is complete or even when new finders
+     * are found.
+     * @author Ranind
+     */
+    class PasswordResults {
+    public:
 
         /**
          * Adds a listener that will be notified when a pattern is found and when
@@ -25,33 +25,34 @@ namespace Passfault {
          * @param listener callback object to be notified when a pattern is found and
          * when analysis is complete.
          */
-        virtual void addListener(AnalysisListener listener) = 0;
+        virtual void addListener(Passfault::AnalysisListener listener) = 0;
 
         /**
          * Calculates the highest probable combination of finders.  In other words,
          * the weakest combination of found patterns.
          * @return List of finders that make up the weakest combination of found passwords
          */
-        virtual PathCost calculateHighestProbablePatterns();
+        virtual Passfault::PathCost calculateHighestProbablePatterns() = 0;
 
         /**
          * This method is called by pattern finders to store a newly discovered pattern
          * in a password.
          * @param patt pattern found in the password.
          */
-        void foundPattern(PasswordPattern patt);
+        virtual void foundPattern(Passfault::PasswordPattern patt) = 0;
 
         /**
          * @return total number of finders identified.
          */
-        int getPossiblePatternCount();
+        virtual int getPossiblePatternCount() = 0;
 
-    public:
+        // TODO: Documentation
+        virtual Java::CharSequence getCharSequence() = 0;
 
-        CharSequence getCharSequence();
-
-        int getLength();
+        // TODO: Documentation
+        virtual int getLength() = 0;
     };
 
 }
+
 #endif //PASSFAULT_PASSWORDRESULT_HPP

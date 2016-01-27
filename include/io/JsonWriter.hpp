@@ -10,19 +10,30 @@
 
 #include "PasswordPattern"
 #include "PathCost"
-#include "CharSequence.hpp"
+#include "SecureString.hpp"
 
 namespace Passfault {
 
     namespace io {
 
-        /// Writes Passfault++ data to a stream as a JSON encoded string
+        /**
+         * Writes Passfault++ data to a stream as a JSON encoded string
+         * @author Ranind
+         */
         class JsonWriter {
         public:
-            /// Writes all the PasswordPattern's in PathCost to a stream as a JSON encoded string
+            /**
+             * Writes all the PasswordPattern's in PathCost to a stream as a JSON encoded string
+             * @param writer stream to write JSON encoded string to
+             * @param highestPath The PathCost to extract PasswordPattern's from
+             */
             static void write ( std::ostream & writer, const Passfault::PathCost & highestPath );
-            /// Writes a PasswordPattern to a stream as a JSON encoded string
-            static void write ( std::ostream & writer, const Passfault::PasswordPattern & part );
+            /**
+             * Writes a PasswordPattern to a stream as a JSON encoded string
+             * @param writer stream to write JSON encoded string to
+             * @param pattern PasswordPattern to extract data from
+             */
+            static void write ( std::ostream & writer, const Passfault::PasswordPattern & pattern );
         };
 
     }

@@ -15,7 +15,7 @@ void Passfault::io::JsonWriter::write ( std::ostream & writer, const Passfault::
     writer << "{\"cost\": " << cost << ",\"patterns\": [";
 
     for ( const auto & p : path )
-        Passfault::io::JsonWriter::write( writer, p);
+        Passfault::io::JsonWriter::write( writer, p );
 
     writer << "]}";
 }
@@ -32,7 +32,7 @@ void Passfault::io::JsonWriter::write ( std::ostream & writer, const Passfault::
     writer << "\"classification\": \"" << pattern.getClassifiation() << "\",";
 
     writer << "\"matchString\": \"";
-    Java::CharSequence chars = pattern.getMatchString();
+    Passfault::SecureString chars = pattern.getMatchString();
     for ( int i = 0; i < chars.length(); i++ )
         writer << chars.charAt(i);
     writer << "\",";
