@@ -5,11 +5,12 @@
 #ifndef PASSFAULT_JSONWRITER_HPP
 #define PASSFAULT_JSONWRITER_HPP
 
-#include <istream>
+#include <ostream>
 #include <vector>
 
 #include "PasswordPattern"
 #include "PathCost"
+#include "CharSequence.hpp"
 
 namespace Passfault {
 
@@ -19,9 +20,9 @@ namespace Passfault {
         class JsonWriter {
         public:
             /// Writes all the PasswordPattern's in PathCost to a stream as a JSON encoded string
-            static void write ( std::istream & writer, const Passfault::PathCost & highestPath );
-            // Writes a PasswordPattern to a stream as a JSON encoded string
-            static void write ( std::istream & writer, const Passfault::PasswordPattern & part );
+            static void write ( std::ostream & writer, const Passfault::PathCost & highestPath );
+            /// Writes a PasswordPattern to a stream as a JSON encoded string
+            static void write ( std::ostream & writer, const Passfault::PasswordPattern & part );
         };
 
     }
