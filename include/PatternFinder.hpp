@@ -21,7 +21,7 @@ namespace Passfault {
          * placed into it.
          * @param pass Object contains the password and any that will be found as the result of analysis
          */
-        virtual void analyze ( Passfault::PasswordResults pass ) = 0;
+        virtual void analyze ( PasswordResults pass ) = 0;
     };
 }
 

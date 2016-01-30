@@ -10,7 +10,7 @@ Passfault::SecureString::SecureString ( std::string & chars ) {
     this->chars = chars;
 
     // Zero out every character for safety
-    memset(chars->c_str(), 0, chars->size());
+    memset((void*)chars.c_str(), 0, chars.size());
 
     // Erase the string
     chars.clear();
@@ -28,13 +28,13 @@ int Passfault::SecureString::length() {
 
 // Get a substring as a SecureString from start to end (not inclusive)
 Passfault::SecureString Passfault::SecureString::subStr ( int start, int end ) {
-    return this->chars.substr(start, end-start);
+    return SecureString(this->chars.substr(start, end-start));
 }
 
 // Secure erase the contents of the SecureString
 void Passfault::SecureString::clear() {
     // Zero out every character for safety
-    memset(this->chars.c_str(), 0, this->chars.size());
+    memset((void*)this->chars.c_str(), 0, this->chars.size());
 
     // Clear the zeroed string
     this->chars.clear();

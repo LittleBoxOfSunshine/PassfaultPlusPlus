@@ -22,13 +22,13 @@ namespace Passfault {
          * @param cost Object that combines a subset of all found patterns with their associated cost (probability of
          * being cracked)
          */
-        virtual void foundHighestProbablePatterns(Passfault::PashCost cost) = 0;
+        virtual void foundHighestProbablePatterns ( PashCost cost ) = 0;
         /**
          * A pattern was found in a password.
          * @param pattern Pattern that was found in the password, including it's name and the part of the password that
          * matches the pattern
          */
-        virtual void foundPattern(Passfault::PasswordPattern pattern) = 0;
+        virtual void foundPattern ( PasswordPattern pattern ) = 0;
     };
 
 }

@@ -16,19 +16,19 @@ namespace Passfault {
      * waitForAnalysis) are blocking. waitForAnalysis is used after analyze is called.
      * @author Ranind
      */
-    class CompositeFinder : public Passfault::PatternFinder {
+    class CompositeFinder : public PatternFinder {
     public:
         /**
          * Blocking analyze. Equivalent to calling analyze and waitForAnalysis.
          * @param pass password results to store found patterns
          */
-        virtual void blockingAnalyze ( Passfault::PasswordResults pass ) = 0;
+        virtual void blockingAnalyze ( PasswordResults pass ) = 0;
 
         /**
          * To be used AFTER analyze is called.
          * @param pass password results to store found patterns
          */
-        virtual void waitForAnalysis ( Passfault::PasswordResults pass ) = 0;
+        virtual void waitForAnalysis ( PasswordResults pass ) = 0;
     };
 
 }

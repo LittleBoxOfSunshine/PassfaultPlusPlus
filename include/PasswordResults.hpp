@@ -25,21 +25,21 @@ namespace Passfault {
          * @param listener callback object to be notified when a pattern is found and
          * when analysis is complete.
          */
-        virtual void addListener(Passfault::AnalysisListener listener) = 0;
+        virtual void addListener ( AnalysisListener listener ) = 0;
 
         /**
          * Calculates the highest probable combination of finders.  In other words,
          * the weakest combination of found patterns.
          * @return List of finders that make up the weakest combination of found passwords
          */
-        virtual Passfault::PathCost calculateHighestProbablePatterns() = 0;
+        virtual PathCost calculateHighestProbablePatterns() = 0;
 
         /**
          * This method is called by pattern finders to store a newly discovered pattern
          * in a password.
          * @param patt pattern found in the password.
          */
-        virtual void foundPattern(Passfault::PasswordPattern patt) = 0;
+        virtual void foundPattern ( PasswordPattern patt ) = 0;
 
         /**
          * @return total number of finders identified.
