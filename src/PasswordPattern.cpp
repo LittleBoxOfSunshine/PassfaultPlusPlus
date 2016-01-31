@@ -1,5 +1,5 @@
 //
-// Created by cahenk on 1/30/16.
+// Created by Chris Henk on 1/30/16.
 //
 
 #include "PasswordPattern.hpp"
@@ -19,34 +19,34 @@ Passfault::PasswordPattern::PasswordPattern(int startIndex, int length, SecureSt
     // NO BODY FOR THIS FUNCTION
 }
 
-double Passfault::PasswordPattern::getPatternSize() {
+double Passfault::PasswordPattern::getPatternSize() const {
     return this->cost;
 }
 
-int Passfault::PasswordPattern::getStartIndex() {
+int Passfault::PasswordPattern::getStartIndex() const {
     return this->startIndex;
 }
 
-int Passfault::PasswordPattern::getLength() {
+int Passfault::PasswordPattern::getLength() const {
     return this->length;
 }
 
-double Passfault::PasswordPattern::getCost() {
+double Passfault::PasswordPattern::getCost() const {
     return this->cost;
 }
 
-Passfault::SecureString Passfault::PasswordPattern::getMatchString() {
+Passfault::SecureString Passfault::PasswordPattern::getMatchString() const {
     return this->matchString;
 }
 
-std::string Passfault::PasswordPattern::getDescription() {
+std::string Passfault::PasswordPattern::getDescription() const {
     return this->description;
 }
 
-std::string Passfault::PasswordPattern::getName() {
+std::string Passfault::PasswordPattern::getName() const {
     return this->name;
 }
 
-std::string Passfault::PasswordPattern::getClassification() {
+std::string Passfault::PasswordPattern::getClassification() const {
     return this->classification;
 }

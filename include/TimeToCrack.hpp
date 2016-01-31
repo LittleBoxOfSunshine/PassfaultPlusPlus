@@ -1,5 +1,5 @@
 //
-// Created by cahenk on 1/26/16.
+// Created by Chris Henk on 1/26/16.
 //
 
 #ifndef PASSFAULT_TIMETOCRACK_HPP
@@ -28,14 +28,14 @@ namespace Passfault {
         };
 
         enum HackerBudget {
-            US_500 = HackerType::EVERY_DAY_HACKER,
-            US_5000 = HackerType::DEDICATED_HACKER,
-            US_50000 = HackerType::ORGANIZED_CRIME_HACKER,
-            US_500000 = HackerType::GOVERNMENT_HACKER
+            US_500 = Passfault::TimeToCrack::EVERY_DAY_HACKER,
+            US_5000 = Passfault::TimeToCrack::DEDICATED_HACKER,
+            US_50000 = Passfault::TimeToCrack::ORGANIZED_CRIME_HACKER,
+            US_500000 = Passfault::TimeToCrack::GOVERNMENT_HACKER
         };
 
         enum HashCrackTimeNS : unsigned long {
-            B_CRYPT = TimeToCrack::getBcryptCrackNanoSeconds(10),
+            B_CRYPT = Passfault::TimeToCrack::getBcryptCrackNanoSeconds(10),
             MD5_CRYPT = 226,
             SHA_512_CRYPT = 29247,
             PASSWORD_SAFE = 1543
@@ -73,7 +73,7 @@ namespace Passfault {
          * for the underlying Blowfish-based hashing algorithm. Defaults to 10.
          * @return the number of nanoseconds required to compute the hash
          */
-        static unsigned long getBcryptCrackNanoSeconds ( int cost );
+        static unsigned long getBcryptCrackNanoSeconds ( int cost ) const;
 
     };
 

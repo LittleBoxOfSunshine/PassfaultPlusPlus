@@ -1,5 +1,5 @@
 //
-// Created by cahenk on 1/26/16.
+// Created by Chris Henk on 1/26/16.
 //
 
 #include "TimeToCrack.hpp"
@@ -106,8 +106,10 @@ std::string Passfault::TimeToCrack::getRoundedSizeString ( double size ) {
 
     // Print the size label
     ss << ' ' << types[roundCount];
+
+    return ss.str();
 }
 
-unsigned long Passfault::TimeToCrack::getBcryptCrackNanoSeconds(int cost) {
+unsigned long Passfault::TimeToCrack::getBcryptCrackNanoSeconds(int cost) const {
     return Passfault::TimeToCrack::B_CRYPT_BASE_NS * (2<<cost);
 }

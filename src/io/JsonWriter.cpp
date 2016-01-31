@@ -29,7 +29,7 @@ void Passfault::io::JsonWriter::write ( std::ostream & writer, const Passfault::
     writer << "\"name\": \"" << pattern.getName() << "\",";
     writer << "\"description\": \"" << pattern.getDescription() << "\",";
     writer << "\"patternSize\": " << pattern.getPatternSize() << ",";
-    writer << "\"classification\": \"" << pattern.getClassifiation() << "\",";
+    writer << "\"classification\": \"" << pattern.getClassification() << "\",";
 
     writer << "\"matchString\": \"";
     Passfault::SecureString chars = pattern.getMatchString();

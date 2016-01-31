@@ -1,5 +1,5 @@
 //
-// Created by cahenk on 1/30/16.
+// Created by Chris Henk on 1/30/16.
 //
 
 #ifndef PASSFAULT_PASSWORDPATTERN_HPP
@@ -50,49 +50,49 @@ namespace Passfault {
          * includes the length of the specific password found
          * @return the number of combinations that fit within this pattern
          */
-        double getPatternSize();
+        double getPatternSize() const;
 
         /**
          * Gets the match start index
          * @return the match start index
          */
-        int getStartIndex();
+        int getStartIndex() const;
 
         /**
          * Gets the match length
          * @return the match length
          */
-        int getLength();
+        int getLength() const;
 
         /**
          * Gets the cost
          * @return the cost
          */
-        double getCost();
+        double getCost() const;
 
         /**
          * Gets the match string
          * @return the match string
          */
-        SecureString getMatchString();
+        SecureString getMatchString() const;
 
         /**
          * Gets the description
          * @return the description
          */
-        std::string getDescription();
+        std::string getDescription() const;
 
         /**
          * Gets the name
          * @return the name
          */
-        std::string getName();
+        std::string getName() const;
 
         /**
          * Gets the classification
          * @return the classification
          */
-        std::string getClassification();
+        std::string getClassification() const;
     };
 
 }

@@ -1,5 +1,5 @@
 //
-// Created by cahenk on 1/26/16.
+// Created by Chris Henk on 1/26/16.
 //
 
 #include "SecureString.hpp"
@@ -33,8 +33,9 @@ unsigned long Passfault::SecureString::length() {
 }
 
 // Get a substring as a SecureString from start to end (not inclusive)
-Passfault::SecureString Passfault::SecureString::subStr ( int start, int end ) {
-    return SecureString(this->chars.substr(start, end-start));
+Passfault::SecureString Passfault::SecureString::subStr ( size_t start, size_t end ) {
+    std::string temp = this->chars.substr(start, end-start);
+    return SecureString(temp);
 }
 
 // Secure erase the contents of the SecureString
@@ -47,8 +48,16 @@ void Passfault::SecureString::clear() {
 }
 
 // Assignment operator deep copy
-Passfault::SecureString & operator= ( const Passfault::SecureString & rhs ) {
+Passfault::SecureString & Passfault::SecureString::operator= ( const Passfault::SecureString & rhs ) {
+    // Check for self assignment
+    if ( this == &rhs )
+        return *this;
 
+    // Copy the underlying string
+    this->chars = rhs.chars;
+
+    // Return pointer to the existing object
+    return *this;
 }
 
 // Call the clear function upon destruction

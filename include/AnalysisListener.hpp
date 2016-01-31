@@ -1,12 +1,12 @@
 //
-// Created by cahenk on 1/26/16.
+// Created by Chris Henk on 1/26/16.
 //
 
 #ifndef PASSFAULT_ANALYSISLISTENER_HPP_H
 #define PASSFAULT_ANALYSISLISTENER_HPP_H
 
-#include "PasswordPattern.hpp"
 #include "PathCost.hpp"
+#include "PasswordPattern.hpp"
 
 namespace Passfault {
 

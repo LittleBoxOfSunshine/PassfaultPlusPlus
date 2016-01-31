@@ -1,5 +1,5 @@
 //
-// Created by cahenk on 1/26/16.
+// Created by Chris Henk on 1/26/16.
 //
 
 #ifndef PASSFAULT_COMPOSITEFINDER_HPP

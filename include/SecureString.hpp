@@ -1,5 +1,5 @@
 //
-// Created by cahenk on 1/26/16.
+// Created by Chris Henk on 1/26/16.
 //
 
 #ifndef PASSFAULT_SECURESTRING_HPP
@@ -50,7 +50,7 @@ namespace Passfault {
          * @param end the index to end the substring (not inclusive)
          * @return the substring from start to end (not inclusive)
          */
-        SecureString subStr ( int start, int end );
+        SecureString subStr ( size_t start, size_t end );
 
         /**
          * Securely clears the string by overwriting all data with 0's.

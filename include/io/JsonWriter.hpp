@@ -8,8 +8,8 @@
 #include <ostream>
 #include <vector>
 
-#include "PasswordPattern"
-#include "PathCost"
+#include "PasswordPattern.hpp"
+#include "../PathCost.hpp"
 #include "SecureString.hpp"
 
 namespace Passfault {
