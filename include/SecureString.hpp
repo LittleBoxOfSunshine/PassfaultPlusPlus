@@ -28,6 +28,13 @@ namespace Passfault {
         SecureString ( std::string & chars );
 
         /**
+         * Construct a secure string from an existing secure string. This process is NOT
+         * destructive, it is a copy constructor.
+         * @param secureString the secure string to deep copy
+         */
+        SecureString ( const SecureString & secureString );
+
+        /**
          * @param index of the character to return
          * @return the index-th (nth) character of the string
          */
@@ -36,7 +43,7 @@ namespace Passfault {
         /**
          * @return the length of the string
          */
-        int length();
+        unsigned long length();
 
         /**
          * @param start the index to begin the substring
@@ -50,6 +57,13 @@ namespace Passfault {
          * This function is called by the destructor
          */
         void clear();
+
+        /**
+         * Overloaded assignment operator for deep copy. This is NOT destructive
+         * and creates a COPY of the underlying string
+         * @param rhs the secure string to clone
+         */
+        SecureString & operator= ( const SecureString & rhs );
 
         /**
          * Uses the clear function to securely erase its data

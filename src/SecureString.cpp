@@ -16,13 +16,19 @@ Passfault::SecureString::SecureString ( std::string & chars ) {
     chars.clear();
 }
 
+// Copy Constructor
+Passfault::SecureString::SecureString ( const Passfault::SecureString & secureString ) {
+    // Copy the underlying string
+    this->chars = secureString.chars;
+}
+
 // Get nth character
 char Passfault::SecureString::charAt ( int index ) {
     return this->chars[index];
 }
 
 // Get length of string
-int Passfault::SecureString::length() {
+unsigned long Passfault::SecureString::length() {
     return this->chars.size();
 }
 
@@ -38,6 +44,11 @@ void Passfault::SecureString::clear() {
 
     // Clear the zeroed string
     this->chars.clear();
+}
+
+// Assignment operator deep copy
+Passfault::SecureString & operator= ( const Passfault::SecureString & rhs ) {
+
 }
 
 // Call the clear function upon destruction
