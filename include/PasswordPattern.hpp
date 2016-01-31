@@ -38,14 +38,17 @@ namespace Passfault {
                           std::string description, std::string name, std::string classification );
 
         /**
-         *
+         * @param startIndex
+         * @param length
+         * @param
          */
         PasswordPattern ( int startIndex, int length, SecureString matchString, double patternSize,
                           std::string description );
 
         /**
-         * Gets the pattern match size
-         * @return the pattern match size
+         * Gets the number of combinations that fit within this pattern. Note that this
+         * includes the length of the specific password found
+         * @return the number of combinations that fit within this pattern
          */
         double getPatternSize();
 

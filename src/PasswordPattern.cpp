@@ -5,27 +5,22 @@
 #include "PasswordPattern.hpp"
 
 Passfault::PasswordPattern::PasswordPattern(int startIndex, int length, SecureString matchString, double patternSize,
-                                            std::string description, std::string name, std::string classification) {
-    this->startIndex = startIndex;
-    this->length = length;
-    this->matchString = matchString;
-    this->patternSize = patternSize;
-    this->description = description;
-    this->name = name;
-    this->classification = classification;
+                                            std::string description, std::string name, std::string classification) :
+                                                startIndex(startIndex), length(length), matchString(matchString),
+                                                cost(patternSize), description(description), name(name),
+                                                classification(classification) {
+    // NO BODY FOR THIS FUNCTION
 }
 
 Passfault::PasswordPattern::PasswordPattern(int startIndex, int length, SecureString matchString, double patternSize,
-                                            std::string description) {
-    this->startIndex = startIndex;
-    this->length = length;
-    this->matchString = matchString;
-    this->patternSize = patternSize;
-    this->description = description;
+                                            std::string description) : startIndex(startIndex), length(length),
+                                                                       matchString(matchString), cost(patternSize),
+                                                                       description(description) {
+    // NO BODY FOR THIS FUNCTION
 }
 
 double Passfault::PasswordPattern::getPatternSize() {
-    return this->patternSize;
+    return this->cost;
 }
 
 int Passfault::PasswordPattern::getStartIndex() {
@@ -33,7 +28,7 @@ int Passfault::PasswordPattern::getStartIndex() {
 }
 
 int Passfault::PasswordPattern::getLength() {
-    return this->getLength();
+    return this->length;
 }
 
 double Passfault::PasswordPattern::getCost() {
