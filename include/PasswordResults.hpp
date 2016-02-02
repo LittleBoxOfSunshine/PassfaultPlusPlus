@@ -47,7 +47,7 @@ namespace Passfault {
         virtual int getPossiblePatternCount() = 0;
 
         // TODO: Documentation
-        virtual Java::CharSequence getCharSequence() = 0;
+        virtual SecureString getPassword() = 0;
 
         // TODO: Documentation
         virtual int getLength() = 0;
