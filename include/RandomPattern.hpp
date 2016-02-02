@@ -1,0 +1,8 @@
+//
+// Created by Chris Henk on 2/2/16.
+//
+
+#ifndef PASSFAULT_RANDOMPATTERN_HPP
+#define PASSFAULT_RANDOMPATTERN_HPP
+
+#endif //PASSFAULT_RANDOMPATTERN_HPP

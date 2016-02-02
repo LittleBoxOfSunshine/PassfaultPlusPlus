@@ -17,21 +17,16 @@ namespace Passfault {
      */
     class TimeToCrack {
         private:
+            /** Time in nanoseconds for GPU to complete bcrypt with 1 iteration of the underlying blowfish algorithm */
             const static unsigned long B_CRYPT_BASE_NS = 253;
         public:
 
+        /** Preset budgets based on attacker classification */
         enum HackerType {
             EVERY_DAY_HACKER = 500,
             DEDICATED_HACKER = 5000,
             ORGANIZED_CRIME_HACKER = 50000,
             GOVERNMENT_HACKER = 500000,
-        };
-
-        enum HackerBudget {
-            US_500 = Passfault::TimeToCrack::EVERY_DAY_HACKER,
-            US_5000 = Passfault::TimeToCrack::DEDICATED_HACKER,
-            US_50000 = Passfault::TimeToCrack::ORGANIZED_CRIME_HACKER,
-            US_500000 = Passfault::TimeToCrack::GOVERNMENT_HACKER
         };
 
         enum HashCrackTimeNS : unsigned long {

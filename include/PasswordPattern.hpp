@@ -21,26 +21,49 @@ namespace Passfault {
     class PasswordPattern {
     private:
 
+        /** The index in the password where the pattern beings */
         const int startIndex;
+
+        /** The length of the substring that matches the pattern */
         const int length;
+
+        /** The number of possible combinations in the pattern (with length taken into account) */
         const double cost;
+
+        /** The substring of the password that matches the pattern */
         const SecureString matchString;
+
+        /** A description of the pattern */
         const std::string description;
+
+        /** Canonical name of the pattern, identified by the constant NAME on a pattern finder strategy */
         const std::string name;
+
+        /** Language of the pattern, or another way to classify the pattern */
         const std::string classification;
 
     public:
 
         /**
-         *
+         * Constructs a password pattern with full description
+         * @param startIndex index into the password of where the pattern begins
+         * @param length number of characters of the pattern in the password
+         * @param matchString the substring of the password that matches the pattern
+         * @param patternSize number of possible combinations in the pattern (with length considered)
+         * @param description description of the pattern
+         * @param name Canonical name of the pattern, identified by the constant NAME on a pattern finder strategies
+         * @param classification usually the language of the pattern, or another way to classify the pattern
          */
         PasswordPattern ( int startIndex, int length, SecureString matchString, double patternSize,
                           std::string description, std::string name, std::string classification );
 
         /**
-         * @param startIndex
-         * @param length
-         * @param
+         * Constructs a password pattern without defining a name or classification
+         * @param startIndex index into the password of where the pattern begins
+         * @param length number of characters of the pattern in the password
+         * @param matchString the substring of the password that matches the pattern
+         * @param patternSize number of possible combinations in the pattern (with length considered)
+         * @param description description of the pattern
          */
         PasswordPattern ( int startIndex, int length, SecureString matchString, double patternSize,
                           std::string description );

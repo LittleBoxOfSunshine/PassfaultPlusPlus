@@ -42,14 +42,21 @@ namespace Passfault {
         virtual void foundPattern ( PasswordPattern patt ) = 0;
 
         /**
+         * Returns the total number of finders identified
          * @return total number of finders identified.
          */
         virtual int getPossiblePatternCount() = 0;
 
-        // TODO: Documentation
+        /**
+         * Returns the password the results are based on
+         * @return the password the results are based on
+         */
         virtual SecureString getPassword() = 0;
 
-        // TODO: Documentation
+        /**
+         * Returns the length of the password the results are based on
+         * @return the length of the password the results are based on
+         */
         virtual int getLength() = 0;
     };
 

@@ -16,6 +16,7 @@ namespace Passfault {
      */
     class SecureString {
     private:
+        /** Internal string to be managed securely */
         std::string chars;
 
     public:
