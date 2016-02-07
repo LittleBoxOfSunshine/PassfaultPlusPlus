@@ -9,6 +9,7 @@
 
 #include "PasswordResults.hpp"
 #include "SecureString.hpp"
+#include "RandomPattern.hpp"
 
 namespace Passfault {
 
@@ -48,9 +49,6 @@ namespace Passfault {
 
         /** Stores the finalized PathCost for the password */
         PathCost finalResults;
-
-        /** Used to detect different random finders and their strength */
-        RandomPattern randomPatternFinder;
 
         //todo remove counter, this is just for debugging to measure the optimization effectiveness
         int counter = 0;

@@ -4,4 +4,5 @@
 
 #include "PasswordAnalysis.hpp"
 
+// NOTE: randomPatternFinder is going to be used statically instead of as an instance object
 
