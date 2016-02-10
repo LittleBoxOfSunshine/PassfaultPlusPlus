@@ -57,7 +57,7 @@ namespace Passfault {
          * Returns the length of the password the results are based on
          * @return the length of the password the results are based on
          */
-        virtual int getLength() = 0;
+        virtual unsigned long getLength() = 0;
     };
 
 }

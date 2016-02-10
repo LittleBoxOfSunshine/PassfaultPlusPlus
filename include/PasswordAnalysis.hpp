@@ -6,10 +6,14 @@
 #define PASSFAULT_PASSWORDANALYSIS_HPP
 
 #include <unordered_map>
+#include <mutex>
+#include <limits>
 
 #include "PasswordResults.hpp"
 #include "SecureString.hpp"
 #include "RandomPattern.hpp"
+#include "finders/RepeatingPatternFinder.hpp"
+#include "AnalysisListener.hpp"
 
 namespace Passfault {
 
@@ -25,6 +29,9 @@ namespace Passfault {
     private:
 
         // TODO: Figure out a logging library to use?
+
+        /** Mutex for synchronized block */
+        std::mutex mutex_;
 
         /** The password being analyzed */
         SecureString password;
@@ -48,7 +55,7 @@ namespace Passfault {
         RepeatingPatternFinder repeatingPatternFinder;
 
         /** Stores the finalized PathCost for the password */
-        PathCost finalResults;
+        PathCost* finalResults = nullptr;
 
         //todo remove counter, this is just for debugging to measure the optimization effectiveness
         int counter = 0;
@@ -73,7 +80,7 @@ namespace Passfault {
          * @return the length of the password being analyzed
          * @override
          */
-        virtual int getLength();
+        virtual unsigned long getLength();
 
         /**
          * Adds a listener that will be notified when a password is found and when a password analysis is complete.
@@ -84,18 +91,13 @@ namespace Passfault {
         virtual void addListener ( AnalysisListener listener );
 
         /**
-         * Function is called by pattern finders to store a newly discovered pattern within the password
+         * Function is called by pattern finders to store a newly discovered pattern within the password.
+         * This function is synchronized! (Other threads will be blocked until the current thread using the
+         * object is finished)
          * @param pattern
          * @override the pattern found in the password
          */
         virtual void foundPattern ( PasswordPattern pattern );
-
-        /**
-         * Loads the vector of patterns that begin on the index of the password
-         * @param startIndex the starting index of patterns to return
-         * @return the vector of patterns that begin on the index of the password
-         */
-        std::vector<PasswordPattern> getIndexSet ( int startIndex );
 
         /**
          * Gets the total number of patterns identified
@@ -111,11 +113,20 @@ namespace Passfault {
          */
         virtual PathCost calculateHighestProbablePatterns();
 
+    private:
+
+        /**
+        * Loads the vector of patterns that begin on the index of the password
+        * @param startIndex the starting index of patterns to return
+        * @return the vector of patterns that begin on the index of the password
+        */
+        std::vector<PasswordPattern> & getIndexSet ( int startIndex );
+
         /**
          * Recursive call to compute the smallest cost (weakest combination) of finders
          * starting at the index specified by startChar
          * @param startChar index of the character to start with
-         * @return the smallest PathCost found in the analysis
+         * @return a pointer to the smallest PathCost found in the analysis
          */
         PathCost smallestCost ( int startChar );
 
@@ -127,19 +138,14 @@ namespace Passfault {
         PathCost calculateIthSmallestCost ( std::vector<PasswordPattern> ithPatterns );
 
         /**
-         * Runs the post processing with a repeatingFinder to handle any duplicates that may exist
-         * @param cost the PatchCost to handle duplicates for
-         * @return a cloned PathCost that has gone through post processing
-         */
-        PathCost postAnalysis ( const PathCost & cost );
-
-        /**
-         * Get the random pattern strength of a substring of the password
+         * Add the random pattern strength of a substring of the password to the cost.
+         * Function will return if startChar is > length.
+         * @param path the path cost to add to
          * @param startChar the starting index
          * @param endChar the ending index (noninclusive)
          * @return the random pattern for the substring of the password
          */
-        PasswordPattern getRandomPattern ( int startChar, int endChar );
+        inline void addRandomPattern ( PathCost & path, int startChar, unsigned long length );
 
         /**
          * Overwrites the PathCost stored as the smallest cost for index i. Note that the function will
@@ -150,14 +156,9 @@ namespace Passfault {
         void setIthSmallestCost ( int i, PathCost pathCost );
 
         /**
-         * Returns a deep copy of the smallest PathCost for position i.
-         * @param i index to return
-         * @return a deep copy of the smallest PathCost for position i.
+         * Destructor, frees memory for finalResults pointer if necessary
          */
-        PathCost getIthSmallestCost ( int i );
-
-        // TODO: Determine if this function is actually needed, it's meant to help the java garbage collector
-        void cleanup();
+        ~PasswordAnalysis();
     };
 
 }

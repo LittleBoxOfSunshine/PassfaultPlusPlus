@@ -17,8 +17,10 @@ namespace Passfault {
      */
     class TimeToCrack {
         private:
+
             /** Time in nanoseconds for GPU to complete bcrypt with 1 iteration of the underlying blowfish algorithm */
             const static unsigned long B_CRYPT_BASE_NS = 253;
+
         public:
 
         /** Preset budgets based on attacker classification */

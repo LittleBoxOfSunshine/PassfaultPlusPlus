@@ -22,7 +22,8 @@ namespace Passfault {
          * @param cost Object that combines a subset of all found patterns with their associated cost (probability of
          * being cracked)
          */
-        virtual void foundHighestProbablePatterns ( PashCost cost ) = 0;
+        virtual void foundHighestProbablePatterns ( const PathCost * const cost ) = 0;
+
         /**
          * A pattern was found in a password.
          * @param pattern Pattern that was found in the password, including it's name and the part of the password that
