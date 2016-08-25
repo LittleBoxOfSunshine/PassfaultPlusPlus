@@ -14,7 +14,7 @@ void Passfault::io::JsonWriter::write ( std::ostream & writer, const Passfault::
     // Write the loaded data to the provided stream
     writer << "{\"cost\": " << cost << ",\"patterns\": [";
 
-    for ( const auto & p : path )
+    for ( auto & p : path )
         Passfault::io::JsonWriter::write( writer, p );
 
     writer << "]}";

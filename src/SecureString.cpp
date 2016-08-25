@@ -4,6 +4,23 @@
 
 #include "SecureString.hpp"
 
+// Default constructor
+Passfault::SecureString::SecureString() {
+    this->chars = "";
+}
+
+// Constructor
+Passfault::SecureString::SecureString ( std::string* chars ) {
+    // Copy the string
+    this->chars = *chars;
+
+    // Zero out every character for safety
+    memset((void*)chars->c_str(), 0, chars->size());
+
+    // Erase the string
+    delete chars;
+}
+
 // Constructor
 Passfault::SecureString::SecureString ( std::string & chars ) {
     // Copy the string

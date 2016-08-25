@@ -5,6 +5,9 @@ project (Passfault++)
 set (PASSFAULT++_VERSION_MAJOR 0)
 set (PASSFAULT++_VERSION_MINOR 1)
 
+# Enable C++11
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+
 # Include headers into the project
 include_directories(include)
 

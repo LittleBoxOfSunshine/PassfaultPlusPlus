@@ -61,20 +61,20 @@ namespace Passfault {
          * See. getTotalCost
          * @return the cost of the current finders to the end of the pattern list
          */
-        double getRelativeCost();
+        double getRelativeCost() const;
 
         /**
          * Returns the number of passwords that fit in the finders in this path plus the additional
          * cost of random characters not covered by finders.
          * @return number of passwords in finders + random character cost
          */
-        double getTotalCost();
+        double getTotalCost() const;
 
         /**
          * Returns the patterns that make up the PathCost's path
          * @return the patterns that make up the PathCost's path
          */
-        std::vector<PasswordPattern> getPath();
+        std::vector<PasswordPattern> getPath() const;
     };
 
 }

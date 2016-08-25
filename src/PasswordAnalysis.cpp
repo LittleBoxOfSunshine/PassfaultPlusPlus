@@ -1,8 +1,6 @@
 //
 // Created by Chris Henk on 1/26/16.
 //
-
-#include <limits>
 #include "PasswordAnalysis.hpp"
 
 Passfault::PasswordAnalysis::PasswordAnalysis(SecureString password) {
@@ -82,7 +80,7 @@ PathCost Passfault::PasswordAnalysis::calculateHighestProbablePatterns() {
         for (AnalysisListener & observer : this->analysisListeners)
             observer.foundHighestProbablePatterns(this->finalResults);
 
-        // TODO: Determine if these are needed, originally intended to clean up any circular references for garabage cleanup
+        // TODO: Determine if these are needed, originally intended to clean up any circular references for garbage cleanup
         //this->ithSmallestCost.clear();
         //this->foundPatterns.clear();
     }
@@ -96,7 +94,7 @@ PathCost Passfault::PasswordAnalysis::smallestCost(int startChar) {
     auto itr = this->ithSmallestCost.find(startChar);
 
     if (*itr == this->ithSmallestCost.end()) {
-        PathCost smallestCostPath(*this);
+        PathCost smallestCostPath((PasswordResults)*this);
 
         for (int i = startChar; i < this->password.length(); i++) {
             std::vector<PasswordPattern> ithPatterns = this->foundPatterns[i];
@@ -114,6 +112,27 @@ PathCost Passfault::PasswordAnalysis::smallestCost(int startChar) {
         if () {
 
         }
+
+        /*
+         * for (int i = startChar; i < password.length(); i++) {
+        List<PasswordPattern> ithPatterns = foundPatterns.get(i);
+        if (ithPatterns != null) {
+          counter++;
+
+          PathCost pathCost = calculateIthSmallestCost(ithPatterns);
+
+          //random characters between startChar and the next found pattern
+          PasswordPattern randomPattern = getRandomPattern(startChar, i);
+          if (randomPattern != null) {
+            pathCost.addPattern(randomPattern);
+          }
+
+          if (pathCost.getRelativeCost() < smallestCost) {
+            smallestCost = pathCost.getRelativeCost();
+            smallestCostPath = pathCost;
+          }
+
+         */
 
     }
     else {

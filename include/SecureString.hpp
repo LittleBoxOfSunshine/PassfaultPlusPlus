@@ -22,6 +22,18 @@ namespace Passfault {
     public:
 
         /**
+         * Constructs a secure string with an empty string. Default constructor.
+         */
+        SecureString();
+
+        /**
+         * Construct a secure string from an existing string. This process is destructive,
+         * the given string will be securely destroyed to increase security
+         * @param chars the string pointer to become a SecureString
+         */
+        SecureString ( std::string* chars );
+
+        /**
          * Construct a secure string from an existing string. This process is destructive,
          * the given string will be securely destroyed to increase security
          * @param chars the string to become a SecureString
