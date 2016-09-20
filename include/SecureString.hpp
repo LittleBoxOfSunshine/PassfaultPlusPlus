@@ -19,6 +19,12 @@ namespace Passfault {
         /** Internal string to be managed securely */
         std::string chars;
 
+        /**
+         * Zeros out the data contained within the given string
+         * @param chars the string whose data is to be zeroed
+         */
+        inline void zero ( std::string & chars );
+
     public:
 
         /**
@@ -51,7 +57,7 @@ namespace Passfault {
          * @param index of the character to return
          * @return the index-th (nth) character of the string
          */
-        char charAt ( int index );
+        char& operator[] ( size_t index );
 
         /**
          * @return the length of the string

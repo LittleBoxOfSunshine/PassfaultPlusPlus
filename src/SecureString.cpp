@@ -15,7 +15,7 @@ Passfault::SecureString::SecureString ( std::string* chars ) {
     this->chars = *chars;
 
     // Zero out every character for safety
-    memset((void*)chars->c_str(), 0, chars->size());
+    this->zero(*chars);
 
     // Erase the string
     delete chars;
@@ -27,7 +27,7 @@ Passfault::SecureString::SecureString ( std::string & chars ) {
     this->chars = chars;
 
     // Zero out every character for safety
-    memset((void*)chars.c_str(), 0, chars.size());
+    this->zero(chars);
 
     // Erase the string
     chars.clear();
@@ -40,7 +40,7 @@ Passfault::SecureString::SecureString ( const Passfault::SecureString & secureSt
 }
 
 // Get nth character
-char Passfault::SecureString::charAt ( int index ) {
+char& Passfault::SecureString::operator[] ( size_t index ) {
     return this->chars[index];
 }
 
@@ -51,14 +51,17 @@ unsigned long Passfault::SecureString::length() {
 
 // Get a substring as a SecureString from start to end (not inclusive)
 Passfault::SecureString Passfault::SecureString::subStr ( size_t start, size_t end ) {
-    std::string temp = this->chars.substr(start, end-start);
-    return SecureString(temp);
+    // Substring temporary container, SecureString constructor will handle zeroing it
+    std::string sub = this->chars.substr(start, end-start);
+
+    // Construct SecureString from the temporary substring container
+    return SecureString(sub);
 }
 
 // Secure erase the contents of the SecureString
 void Passfault::SecureString::clear() {
     // Zero out every character for safety
-    memset((void*)this->chars.c_str(), 0, this->chars.size());
+    this->zero(this->chars);
 
     // Clear the zeroed string
     this->chars.clear();
@@ -70,6 +73,9 @@ Passfault::SecureString & Passfault::SecureString::operator= ( const Passfault::
     if ( this == &rhs )
         return *this;
 
+    // Zero any data that currently exists
+    this->clear();
+
     // Copy the underlying string
     this->chars = rhs.chars;
 
@@ -80,4 +86,9 @@ Passfault::SecureString & Passfault::SecureString::operator= ( const Passfault::
 // Call the clear function upon destruction
 Passfault::SecureString::~SecureString() {
     this->clear();
+}
+
+// Zero out the data in the given string
+void Passfault::SecureString::zero(std::string & chars) {
+    memset((void*)chars.c_str(), 0, chars.size());
 }
