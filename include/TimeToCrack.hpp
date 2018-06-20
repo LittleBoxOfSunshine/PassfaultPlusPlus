@@ -20,6 +20,7 @@ namespace Passfault {
 
             /** Time in nanoseconds for GPU to complete bcrypt with 1 iteration of the underlying blowfish algorithm */
             const static unsigned long B_CRYPT_BASE_NS = 253;
+            const static uint8_t B_CRYPT_COST = 10;
 
         public:
 
@@ -32,7 +33,7 @@ namespace Passfault {
         };
 
         enum HashCrackTimeNS : unsigned long {
-            B_CRYPT = Passfault::TimeToCrack::getBcryptCrackNanoSeconds(10),
+            B_CRYPT = Passfault::TimeToCrack::getBcryptCrackNanoSeconds(Passfault::TimeToCrack::B_CRYPT_COST),
             MD5_CRYPT = 226,
             SHA_512_CRYPT = 29247,
             PASSWORD_SAFE = 1543
@@ -70,7 +71,7 @@ namespace Passfault {
          * for the underlying Blowfish-based hashing algorithm. Defaults to 10.
          * @return the number of nanoseconds required to compute the hash
          */
-        static unsigned long getBcryptCrackNanoSeconds ( int cost ) const;
+        static unsigned long getBcryptCrackNanoSeconds ( unsigned int cost ) const;
 
     };
 

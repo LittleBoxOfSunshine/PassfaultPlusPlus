@@ -106,37 +106,19 @@ PathCost Passfault::PasswordAnalysis::smallestCost(int startChar) {
 
                 // Random characters between startChar and the next found pattern
                 this->addRandomPattern(pathCost, startChar, this->password.length());
+
+                if (pathCost.getRelativeCost() < smallestCost) {
+                    smallestCost = pathCost.getRelativeCost();
+                    smallestCostPath = pathCost;
+                }
             }
         }
 
-        if () {
-
-        }
-
-        /*
-         * for (int i = startChar; i < password.length(); i++) {
-        List<PasswordPattern> ithPatterns = foundPatterns.get(i);
-        if (ithPatterns != null) {
-          counter++;
-
-          PathCost pathCost = calculateIthSmallestCost(ithPatterns);
-
-          //random characters between startChar and the next found pattern
-          PasswordPattern randomPattern = getRandomPattern(startChar, i);
-          if (randomPattern != null) {
-            pathCost.addPattern(randomPattern);
-          }
-
-          if (pathCost.getRelativeCost() < smallestCost) {
-            smallestCost = pathCost.getRelativeCost();
-            smallestCostPath = pathCost;
-          }
-
-         */
+        return smallestCostPath;
 
     }
     else {
-        return *itr;
+        return (*itr).second;
     }
 }
 

@@ -110,6 +110,6 @@ std::string Passfault::TimeToCrack::getRoundedSizeString ( double size ) {
     return ss.str();
 }
 
-unsigned long Passfault::TimeToCrack::getBcryptCrackNanoSeconds(int cost) const {
+unsigned long Passfault::TimeToCrack::getBcryptCrackNanoSeconds(unsigned int cost) const {
     return Passfault::TimeToCrack::B_CRYPT_BASE_NS * (2<<cost);
 }

@@ -21,14 +21,21 @@ namespace Passfault {
 
         /**
          * Zeros out the data contained within the given string
-         * @param chars the string whose data is to be zeroed
+         * @param chars the string whose data is to be zeroed, defaults to this->chars
          */
-        inline void zero ( std::string & chars );
+        inline void zero ( std::string & str = this->chars; );
+
+        /**
+         * Zeros out the data contained within the given string
+         * @param pointer to the string whose data is to be zeroed
+         * @param length of the string whose data is to be zeroed
+         */
+        inline void zero ( char* str, size_t length );
 
     public:
 
         /**
-         * Constructs a secure string with an empty string. Default constructor.
+         * Constructs a secure string that is empty. Default constructor.
          */
         SecureString();
 
@@ -54,6 +61,13 @@ namespace Passfault {
         SecureString ( const SecureString & secureString );
 
         /**
+         * Construct a secure string from a substring of an existing secure string. This
+         * procress is NOT destructive, it is intended to be used in the substring
+         * function, which functions as a convenient alias for this constructor.
+         */
+        SecureString ( const SecureString & secureString, size_t start, size_t end );
+
+        /**
          * @param index of the character to return
          * @return the index-th (nth) character of the string
          */
@@ -69,7 +83,7 @@ namespace Passfault {
          * @param end the index to end the substring (not inclusive)
          * @return the substring from start to end (not inclusive)
          */
-        SecureString subStr ( size_t start, size_t end );
+        SecureString substr ( size_t start, size_t end );
 
         /**
          * Securely clears the string by overwriting all data with 0's.
