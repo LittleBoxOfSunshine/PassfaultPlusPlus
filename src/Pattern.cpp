@@ -2,7 +2,7 @@
 // Created by Chris Henk on 1/30/16.
 //
 
-#include "PasswordPattern.hpp"
+#include "common/Pattern.hpp"
 
 Passfault::PasswordPattern::PasswordPattern(int startIndex, int length, SecureString matchString, double patternSize,
                                             std::string description, std::string name, std::string classification) :

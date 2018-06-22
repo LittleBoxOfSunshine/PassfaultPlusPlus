@@ -5,7 +5,7 @@
 #ifndef PASSFAULT_PASSWORDPATTERN_HPP
 #define PASSFAULT_PASSWORDPATTERN_HPP
 
-#include "SecureString.hpp"
+#include "common/SecureString.hpp"
 
 namespace Passfault {
 
@@ -22,25 +22,25 @@ namespace Passfault {
     private:
 
         /** The index in the password where the pattern beings */
-        const int startIndex;
+        int startIndex;
 
         /** The length of the substring that matches the pattern */
-        const int length;
+        int length;
 
         /** The number of possible combinations in the pattern (with length taken into account) */
-        const double cost;
+        double cost;
 
         /** The substring of the password that matches the pattern */
-        const SecureString matchString;
+        SecureString matchString;
 
         /** A description of the pattern */
-        const std::string description;
+        std::string description;
 
         /** Canonical name of the pattern, identified by the constant NAME on a pattern finder strategy */
-        const std::string name;
+        std::string name;
 
         /** Language of the pattern, or another way to classify the pattern */
-        const std::string classification;
+        std::string classification;
 
     public:
 

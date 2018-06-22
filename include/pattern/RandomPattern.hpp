@@ -8,7 +8,7 @@
 #include <string>
 #include <cmath>
 
-#include "PasswordPattern.hpp"
+#include "common/Pattern.hpp"
 
 namespace Passfault {
 
@@ -30,7 +30,7 @@ namespace Passfault {
     public:
 
         /** Constant for setting PasswordPattern::name */
-        static const std::string RANDOM_PATTERN = "RANDOM_CHARACTERS";
+        static const std::string RANDOM_PATTERN;
 
         /**
          * Calculates the number of possible strings exist when using all alphanumeric characters

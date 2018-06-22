@@ -20,7 +20,7 @@ namespace Passfault {
 
             /** Time in nanoseconds for GPU to complete bcrypt with 1 iteration of the underlying blowfish algorithm */
             const static unsigned long B_CRYPT_BASE_NS = 253;
-            const static uint8_t B_CRYPT_COST = 10;
+            const static uint8_t B_CRYPT_DEFAULT_COST = 10;
 
         public:
 
@@ -33,7 +33,7 @@ namespace Passfault {
         };
 
         enum HashCrackTimeNS : unsigned long {
-            B_CRYPT = Passfault::TimeToCrack::getBcryptCrackNanoSeconds(Passfault::TimeToCrack::B_CRYPT_COST),
+            B_CRYPT = B_CRYPT_BASE_NS * (2<<B_CRYPT_DEFAULT_COST),
             MD5_CRYPT = 226,
             SHA_512_CRYPT = 29247,
             PASSWORD_SAFE = 1543
@@ -46,7 +46,7 @@ namespace Passfault {
          * @param numberOfGPUs the number of GPUs working in parallel
          * @return the number of nanoseconds? needed to crack the pattern
          */
-        static double getTimeToCrackNanoseconds ( double patternSize, long crackTimeNanoseconds = B_CRYPT, int numberOfGPUs = 1 );
+        static double getTimeToCrackNanoseconds ( double patternSize, unsigned long crackTimeNanoseconds = B_CRYPT, int numberOfGPUs = 1 );
 
         /**
          * Estimates the average time to find a password based on attackers computing power and expresses the result
@@ -56,7 +56,7 @@ namespace Passfault {
          * @param numberOfGPUs the number of GPUs working in parallel
          * @return a string that describes the amount of time to crack the pattern, such as "8 months and 3 days"
          */
-        static std::string getTimeToCrackString ( double patternSize, long crackTimeNanoseconds = B_CRYPT, int numberOfGPUs = 1 );
+        static std::string getTimeToCrackString ( double patternSize, unsigned long crackTimeNanoseconds = B_CRYPT, int numberOfGPUs = 1 );
 
         /**
          * Creates a string that approximately describes the size of a number (in words)
@@ -66,12 +66,12 @@ namespace Passfault {
         static std::string getRoundedSizeString ( double size );
 
         /**
-         * Computes the time needed to crack a bcrypt hash based on the cost (complexity)
-         * @param cost the cost (complexity) parameter to be used. It is the base 2 log of the iteration counter
-         * for the underlying Blowfish-based hashing algorithm. Defaults to 10.
-         * @return the number of nanoseconds required to compute the hash
-         */
-        static unsigned long getBcryptCrackNanoSeconds ( unsigned int cost ) const;
+        * Computes the time needed to crack a bcrypt hash based on the cost (complexity)
+        * @param cost the cost (complexity) parameter to be used. It is the base 2 log of the iteration counter
+        * for the underlying Blowfish-based hashing algorithm. Defaults to 10.
+        * @return the number of nanoseconds required to compute the hash
+        */
+        static unsigned long getBcryptCrackNanoSeconds ( unsigned int cost = B_CRYPT_DEFAULT_COST );
 
     };
 

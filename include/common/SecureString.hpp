@@ -20,10 +20,15 @@ namespace Passfault {
         std::string chars;
 
         /**
+         * Zeros out the data contained within this string
+         */
+        inline void zero ();
+
+        /**
          * Zeros out the data contained within the given string
          * @param chars the string whose data is to be zeroed, defaults to this->chars
          */
-        inline void zero ( std::string & str = this->chars; );
+        inline void zero ( std::string & str );
 
         /**
          * Zeros out the data contained within the given string
@@ -76,7 +81,7 @@ namespace Passfault {
         /**
          * @return the length of the string
          */
-        unsigned long length();
+        unsigned long length() const;
 
         /**
          * @param start the index to begin the substring

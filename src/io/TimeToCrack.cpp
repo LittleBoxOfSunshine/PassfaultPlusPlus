@@ -2,15 +2,15 @@
 // Created by Chris Henk on 1/26/16.
 //
 
-#include "TimeToCrack.hpp"
+#include "io/TimeToCrack.hpp"
 
-double Passfault::TimeToCrack::getTimeToCrackNanoseconds(double patternSize, long crackTimeNanoseconds,
+double Passfault::TimeToCrack::getTimeToCrackNanoseconds(double patternSize, unsigned long crackTimeNanoseconds,
                                                          int numberOfGPUs) {
     // Compute crack time
     return (crackTimeNanoseconds * patternSize) / numberOfGPUs;
 }
 
-std::string Passfault::TimeToCrack::getTimeToCrackString(double patternSize, long crackTimeNanoseconds,
+std::string Passfault::TimeToCrack::getTimeToCrackString(double patternSize, unsigned long crackTimeNanoseconds,
                                                          int numberOfGPUs) {
     // Compute crack time
     double ns = Passfault::TimeToCrack::getTimeToCrackNanoseconds(patternSize, crackTimeNanoseconds, numberOfGPUs);
@@ -110,6 +110,6 @@ std::string Passfault::TimeToCrack::getRoundedSizeString ( double size ) {
     return ss.str();
 }
 
-unsigned long Passfault::TimeToCrack::getBcryptCrackNanoSeconds(unsigned int cost) const {
-    return Passfault::TimeToCrack::B_CRYPT_BASE_NS * (2<<cost);
+unsigned long Passfault::TimeToCrack::getBcryptCrackNanoSeconds ( unsigned int cost ) {
+    return B_CRYPT_BASE_NS * (2 << cost);
 }

@@ -10,7 +10,7 @@
 #include <unordered_map>
 #include <fstream>
 
-#include "dictionary/Dictionary.hpp"
+#include "finder/dictionary/Dictionary.hpp"
 
 namespace Passfault {
 

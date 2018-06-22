@@ -7,7 +7,7 @@
 
 #include <string>
 
-#include "TimeToCrack.hpp"
+#include "io/TimeToCrack.hpp"
 
 // TODO: determine which functions should have const and & added to their inputs (because no modifications occur)
 

@@ -2,7 +2,7 @@
 // Created by Chris Henk on 1/26/16.
 //
 
-#include "SecureString.hpp"
+#include "common/SecureString.hpp"
 
 // Default constructor
 Passfault::SecureString::SecureString() { }
@@ -10,7 +10,7 @@ Passfault::SecureString::SecureString() { }
 // Constructor
 Passfault::SecureString::SecureString ( std::string* chars ) {
     // Copy the string
-    this->chars = chars;
+    this->chars = *chars;
 
     // Securely erase the existing string
     this->zero(*chars);
@@ -20,6 +20,9 @@ Passfault::SecureString::SecureString ( std::string* chars ) {
 Passfault::SecureString::SecureString ( std::string & chars ) {
     // Copy the string
     this->chars = chars;
+
+    // Securely erase the existing string
+    this->zero(chars);
 }
 
 // Copy Constructor
@@ -33,8 +36,9 @@ Passfault::SecureString::SecureString ( const SecureString & secureString, size_
     // Allocate memory to copy the string
     this->chars.reserve(end - start);
 
+    // TODO: This will need to be adjusted to accommodate utf8
     // Copy the string
-    memcpy((void*)this->chars.c_str(), (void*)secureString.chars.c_str() + start, end - start);
+    memcpy((char*)this->chars.c_str(), (char*)secureString.chars.c_str() + start, end - start);
 }
 
 // Get nth character
@@ -43,7 +47,7 @@ char& Passfault::SecureString::operator[] ( size_t index ) {
 }
 
 // Get length of string
-unsigned long Passfault::SecureString::length() {
+unsigned long Passfault::SecureString::length() const {
     return this->chars.size();
 }
 
@@ -53,17 +57,13 @@ Passfault::SecureString Passfault::SecureString::substr ( size_t start, size_t e
     // this is almost certainly safe, but it requires an extra copy. Returning it immediately
     // may produce an extra copy that remains uncleared
 
-    std::string str();
-
     // Substring temporary container, SecureString constructor will handle zeroing it
     std::string sub = this->chars.substr(start, end-start);
 
     SecureString secStr(sub);
 
-    this
-
     // Construct SecureString from the temporary substring container
-    return secstr;
+    return secStr;
 }
 
 // Secure erase the contents of the SecureString
@@ -98,19 +98,26 @@ Passfault::SecureString::~SecureString() {
     this->zero();
 }
 
+// Zero out the data in this string
+void Passfault::SecureString::zero() {
+    this->zero(this->chars);
+}
+
 // Zero out the data in the given string
-void Passfault::SecureString::zero ( std::string & str = this->chars ) {
+void Passfault::SecureString::zero ( std::string & str ) {
     this->zero((char*)str.c_str(), str.size());
 }
 
+
+// TODO: Determine if this is necessary, if it works, and if O0 instead of O1 or O2 is needed
+// Disable optimizations to ensure that the zeroing actually occurs
+#pragma GCC push_options
+#pragma GCC optimize ("O0")
+
 // Zero out the data in the given string
 void Passfault::SecureString::zero( char* str, size_t length ) {
-    // Disable optimizations to ensure that the zeroing actually occurs
-    // TODO: Determine if this is necessary, if it works, and if O0 instead of O1 or O2 is needed
-    #pragma GCC push_options
-    #pragma GCC optimize ("O0")
-
     memset((void*)str, 0, length);
-
-    #pragma GCC pop_options
 }
+
+// Restore previous global attributes
+#pragma GCC pop_options

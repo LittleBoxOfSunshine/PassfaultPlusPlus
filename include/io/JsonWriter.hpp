@@ -8,9 +8,9 @@
 #include <ostream>
 #include <vector>
 
-#include "PasswordPattern.hpp"
-#include "../PathCost.hpp"
-#include "SecureString.hpp"
+#include "common/Pattern.hpp"
+#include "common/Path.hpp"
+#include "common/SecureString.hpp"
 
 namespace Passfault {
 
@@ -27,7 +27,7 @@ namespace Passfault {
              * @param writer stream to write JSON encoded string to
              * @param highestPath The PathCost to extract PasswordPattern's from
              */
-            static void write ( std::ostream & writer, const Passfault::PathCost & highestPath );
+            static void write ( std::ostream & writer, const Passfault::Path & highestPath );
             /**
              * Writes a PasswordPattern to a stream as a JSON encoded string
              * @param writer stream to write JSON encoded string to

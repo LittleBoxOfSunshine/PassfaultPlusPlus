@@ -2,14 +2,13 @@
 // Created by Chris Henk on 1/31/16.
 //
 
-#ifndef PASSFAULT_PATHCOST_HPP_HPP
-#define PASSFAULT_PATHCOST_HPP_HPP
+#ifndef PASSFAULT_PATH_HPP
+#define PASSFAULT_PATH_HPP
 
 #include <vector>
 
-#include "PasswordResults.hpp"
-#include "PasswordPattern.hpp"
-#include "RandomPattern.hpp"
+#include "common/Pattern.hpp"
+#include "pattern/RandomPattern.hpp"
 
 namespace Passfault {
 
@@ -22,11 +21,11 @@ namespace Passfault {
      *
      * @author Ranind
      */
-    class PathCost {
+    class Path {
     private:
 
         /** Results of the password analysis */
-        PasswordResults password;
+        SecureString password;
 
         /** The patterns that make up the path */
         std::vector<PasswordPattern> path;
@@ -40,13 +39,13 @@ namespace Passfault {
          * Constructor
          * @param password results of analysis to compute cost from
          */
-        PathCost ( const PasswordResults & password );
+        Path ( const SecureString & password );
 
         /**
          * Copy Constructor
          * @param password The PathCost object to copy
          */
-        PathCost ( const PathCost & path );
+        Path ( const Path & path );
 
         /**
          * Adds a pattern to the current path and cost
@@ -79,4 +78,4 @@ namespace Passfault {
 
 }
 
-#endif //PASSFAULT_PATHCOST_HPP_HPP
+#endif //PASSFAULT_PATH_HPP

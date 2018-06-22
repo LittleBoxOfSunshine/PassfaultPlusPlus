@@ -5,7 +5,7 @@
 #ifndef PASSFAULT_PATTERNFINDER_HPP
 #define PASSFAULT_PATTERNFINDER_HPP
 
-#include "PasswordResults.hpp"
+#include "common/PasswordResults.hpp"
 
 namespace Passfault {
 
@@ -21,7 +21,7 @@ namespace Passfault {
          * placed into it.
          * @param pass Object contains the password and any that will be found as the result of analysis
          */
-        virtual void analyze ( PasswordResults pass ) = 0;
+        virtual void search ( SecureString pass ) = 0;
     };
 }
 

@@ -8,12 +8,12 @@
 #include <unordered_map>
 #include <mutex>
 #include <limits>
+#include <vector>
 
-#include "PasswordResults.hpp"
-#include "SecureString.hpp"
-#include "RandomPattern.hpp"
-#include "finders/RepeatingPatternFinder.hpp"
-#include "AnalysisListener.hpp"
+#include "common/SecureString.hpp"
+#include "pattern/RandomPattern.hpp"
+#include "finder/RepeatingPatternFinder.hpp"
+#include "common/Path.hpp"
 
 namespace Passfault {
 
@@ -25,7 +25,7 @@ namespace Passfault {
      *
      * @author Ranind
      */
-    class PasswordAnalysis : public PasswordResults {
+    class PasswordAnalysis {
     private:
 
         // TODO: Figure out a logging library to use?
@@ -43,19 +43,16 @@ namespace Passfault {
          * Map of deep copies of the smallest cost for each index with a vector of patterns, also indexed by the starting
          * position of the pattern in the password
          */
-        std::unordered_map<int, PathCost> ithSmallestCost;
+        std::unordered_map<int, Path> ithSmallestCost;
 
         /** The total number of patterns identified, initialized to 0 */
         int patternCount = 0;
-
-        /** The listeners to be notified when the password analysis is completed */
-        std::vector<AnalysisListener> analysisListeners;
 
         /** Post processing finder for identifying finders that have been repeated */
         RepeatingPatternFinder repeatingPatternFinder;
 
         /** Stores the finalized PathCost for the password */
-        PathCost* finalResults = nullptr;
+        Path* finalResults = nullptr;
 
         //todo remove counter, this is just for debugging to measure the optimization effectiveness
         int counter = 0;
@@ -83,14 +80,6 @@ namespace Passfault {
         virtual unsigned long getLength();
 
         /**
-         * Adds a listener that will be notified when a password is found and when a password analysis is complete.
-         * @param listener callback object to be notified when a password is found and when a password analysis is
-         * complete.
-         * @override
-         */
-        virtual void addListener ( AnalysisListener listener );
-
-        /**
          * Function is called by pattern finders to store a newly discovered pattern within the password.
          * This function is synchronized! (Other threads will be blocked until the current thread using the
          * object is finished)
@@ -111,7 +100,7 @@ namespace Passfault {
          * the weakest combinations of found passwords
          * @override
          */
-        virtual PathCost calculateHighestProbablePatterns();
+        virtual Path calculateHighestProbablePatterns();
 
     private:
 
@@ -128,24 +117,24 @@ namespace Passfault {
          * @param startChar index of the character to start with
          * @return a pointer to the smallest PathCost found in the analysis
          */
-        PathCost smallestCost ( int startChar );
+        Path smallestCost ( int startChar );
 
         /**
          * Helper function for smallest cost
          * @param ithPatterns vector of patterns found for the index
          * @return smallest result of calling smallestCost on all patterns in the vector
          */
-        PathCost calculateIthSmallestCost ( std::vector<PasswordPattern> ithPatterns );
+        Path calculateIthSmallestCost ( std::vector<PasswordPattern> ithPatterns );
 
         /**
          * Add the random pattern strength of a substring of the password to the cost.
-         * Function will return if startChar is > length.
+         * Function will return if startChar is >= length.
          * @param path the path cost to add to
          * @param startChar the starting index
          * @param endChar the ending index (noninclusive)
          * @return the random pattern for the substring of the password
          */
-        inline void addRandomPattern ( PathCost & path, int startChar, unsigned long length );
+        inline void addRandomPattern ( Path & path, int startChar, unsigned long length );
 
         /**
          * Overwrites the PathCost stored as the smallest cost for index i. Note that the function will
@@ -153,7 +142,7 @@ namespace Passfault {
          * @param i index to overwrite
          * @param pathCost the new PatCost data to store
          */
-        void setIthSmallestCost ( int i, PathCost pathCost );
+        void setIthSmallestCost ( int i, Path pathCost );
 
         /**
          * Destructor, frees memory for finalResults pointer if necessary

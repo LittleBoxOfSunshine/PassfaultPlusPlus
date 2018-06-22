@@ -4,8 +4,8 @@
 
 #include "io/JsonWriter.hpp"
 
-// Writes all the PasswordPattern's in PathCost to a stream as a JSON encoded string
-void Passfault::io::JsonWriter::write ( std::ostream & writer, const Passfault::PathCost & highestPath ) {
+// Writes all the Pattern's in Path to a stream as a JSON encoded string
+void Passfault::io::JsonWriter::write ( std::ostream & writer, const Passfault::Path & highestPath ) {
 
     // Load total cost and pattern vector
     double cost = highestPath.getTotalCost();
@@ -20,7 +20,7 @@ void Passfault::io::JsonWriter::write ( std::ostream & writer, const Passfault::
     writer << "]}";
 }
 
-// Writes a PasswordPattern to a stream as a JSON encoded string
+// Writes a Pattern to a stream as a JSON encoded string
 void Passfault::io::JsonWriter::write ( std::ostream & writer, const Passfault::PasswordPattern & pattern ) {
 
     // Write data to stream with necessary formatting to form a JSON encoded string
@@ -34,7 +34,7 @@ void Passfault::io::JsonWriter::write ( std::ostream & writer, const Passfault::
     writer << "\"matchString\": \"";
     Passfault::SecureString chars = pattern.getMatchString();
     for ( int i = 0; i < chars.length(); i++ )
-        writer << chars.charAt(i);
+        writer << chars[i];
     writer << "\",";
 
     writer << "\"startIndex\": \"" << pattern.getStartIndex() << "\",";
