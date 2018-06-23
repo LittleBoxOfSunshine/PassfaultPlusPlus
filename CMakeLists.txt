@@ -18,7 +18,7 @@ include_directories(lib/utf8)
 file(GLOB_RECURSE SOURCES "src/*.cpp")
  
 # Add the executable
-add_executable(Passfault++ ${SOURCES})
+add_executable(Passfault++ ${SOURCES} include/pattern/keyboard/Layout.hpp include/pattern/dictionary/DiskDictionary.hpp include/pattern/dictionary/MemoryDictionary.hpp include/pattern/dictionary/Substitution.hpp include/pattern/dictionary/Insertion.hpp include/pattern/dictionary/Misspelled.hpp include/pattern/keyboard/Horizontal.hpp include/pattern/keyboard/Diagonal.hpp include/pattern/keyboard/Hop.hpp include/pattern/keyboard/ZigZag.hpp include/finder/Finder.hpp)
 
 # Installation location
 install(TARGETS Passfault++ DESTINATION bin)

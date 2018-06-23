@@ -11,8 +11,8 @@
 #include <vector>
 
 #include "common/SecureString.hpp"
-#include "pattern/RandomPattern.hpp"
-#include "finder/RepeatingPatternFinder.hpp"
+#include "pattern/Random.hpp"
+#include "pattern/Repitition.hpp"
 #include "common/Path.hpp"
 
 namespace Passfault {

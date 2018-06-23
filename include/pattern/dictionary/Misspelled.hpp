@@ -1,0 +1,8 @@
+//
+// Created by cahenk on 6/23/18.
+//
+
+#ifndef PASSFAULT_MISSPELLING_HPP
+#define PASSFAULT_MISSPELLING_HPP
+
+#endif //PASSFAULT_MISSPELLING_HPP

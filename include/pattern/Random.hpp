@@ -8,7 +8,7 @@
 #include <string>
 #include <cmath>
 
-#include "common/Pattern.hpp"
+#include "Pattern.hpp"
 
 namespace Passfault {
 

@@ -8,7 +8,7 @@
 #include <ostream>
 #include <vector>
 
-#include "common/Pattern.hpp"
+#include "pattern/Pattern.hpp"
 #include "common/Path.hpp"
 #include "common/SecureString.hpp"
 

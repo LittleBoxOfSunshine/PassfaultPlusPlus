@@ -7,9 +7,10 @@
 
 #include <vector>
 
-#include "common/Pattern.hpp"
-#include "pattern/RandomPattern.hpp"
+#include "pattern/Pattern.hpp"
+#include "pattern/Random.hpp"
 
+// TODO: Include generic way to identify repeated patterns as post-processing step
 namespace Passfault {
 
     /**
