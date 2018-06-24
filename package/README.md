@@ -1,0 +1,1 @@
+Scripts for packaging the products for supported platforms

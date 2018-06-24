@@ -12,7 +12,6 @@
 
 #include "common/SecureString.hpp"
 #include "pattern/Random.hpp"
-#include "pattern/Repitition.hpp"
 #include "common/Path.hpp"
 
 namespace Passfault {
@@ -47,9 +46,6 @@ namespace Passfault {
 
         /** The total number of patterns identified, initialized to 0 */
         int patternCount = 0;
-
-        /** Post processing finder for identifying finders that have been repeated */
-        RepeatingPatternFinder repeatingPatternFinder;
 
         /** Stores the finalized PathCost for the password */
         Path* finalResults = nullptr;
