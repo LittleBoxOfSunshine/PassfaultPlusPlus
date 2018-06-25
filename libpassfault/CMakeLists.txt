@@ -16,9 +16,6 @@ target_include_directories(libpassfault PUBLIC
 add_subdirectory(src)
 
 target_link_libraries(libpassfault utf8)
- 
-# Add the executable
-#add_executable(libpassfault ${SOURCES} include/pattern/keyboard/Layout.hpp include/pattern/dictionary/DiskDictionary.hpp include/pattern/dictionary/MemoryDictionary.hpp include/pattern/dictionary/Substitution.hpp include/pattern/dictionary/Insertion.hpp include/pattern/dictionary/Misspelled.hpp include/pattern/keyboard/Horizontal.hpp include/pattern/keyboard/Diagonal.hpp include/pattern/keyboard/Hop.hpp include/pattern/keyboard/ZigZag.hpp include/finder/Finder.hpp src/test.cpp)
 
 # Use GNUInstallDirs to point 'make install' to the correct locations
 install(TARGETS libpassfault EXPORT MyLibraryConfig
