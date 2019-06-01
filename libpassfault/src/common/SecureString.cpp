@@ -32,17 +32,27 @@ Passfault::SecureString::SecureString ( const Passfault::SecureString & secureSt
 }
 
 // Substring Constructor
-Passfault::SecureString::SecureString ( const SecureString & secureString, size_t start, size_t end ) {
+Passfault::SecureString::SecureString ( const SecureString & secureString, size_t start, size_t length ) {
+    if(start > secureString.length())
+        throw std::out_of_range("Start position cannot be greater than the string length");
+
     // Allocate memory to copy the string
-    this->chars.reserve(end - start);
+    this->chars.reserve(length);
 
     // TODO: This will need to be adjusted to accommodate utf8
     // Copy the string
-    memcpy((char*)this->chars.c_str(), (char*)secureString.chars.c_str() + start, end - start);
+    memcpy(&(this->chars[0]), &(secureString[start]), length);
+    this->chars[length] = '\0';
+
 }
 
 // Get nth character
 char& Passfault::SecureString::operator[] ( size_t index ) {
+    return this->chars[index];
+}
+
+// Get nth character
+const char& Passfault::SecureString::operator[] ( size_t index ) const {
     return this->chars[index];
 }
 
@@ -52,18 +62,9 @@ unsigned long Passfault::SecureString::length() const {
 }
 
 // Get a substring as a SecureString from start to end (not inclusive)
-Passfault::SecureString Passfault::SecureString::substr ( size_t start, size_t end ) {
-    // TODO: Determine if memory is unsafe and/or if this can be optimized in a safe way
-    // this is almost certainly safe, but it requires an extra copy. Returning it immediately
-    // may produce an extra copy that remains uncleared
-
-    // Substring temporary container, SecureString constructor will handle zeroing it
-    std::string sub = this->chars.substr(start, end-start);
-
-    SecureString secStr(sub);
-
-    // Construct SecureString from the temporary substring container
-    return secStr;
+Passfault::SecureString Passfault::SecureString::substr ( size_t start, size_t end ) const {
+    // Wrap functionality of substring constructor
+    return SecureString(*this, start, end);
 }
 
 // Secure erase the contents of the SecureString
@@ -93,6 +94,18 @@ Passfault::SecureString & Passfault::SecureString::operator= ( const Passfault::
     }
 }
 
+bool Passfault::SecureString::operator== ( const Passfault::SecureString & rhs ) const {
+    return std::strcmp(this->chars.c_str(), rhs.chars.c_str()) == 0;
+}
+
+bool Passfault::SecureString::operator== ( const std::string & rhs ) const {
+    return std::strcmp(this->chars.c_str(), rhs.c_str()) == 0;
+}
+
+bool Passfault::SecureString::operator== ( const char * rhs ) const {
+    return std::strcmp(this->chars.c_str(), rhs) == 0;
+}
+
 // Call the clear function upon destruction
 Passfault::SecureString::~SecureString() {
     this->zero();
@@ -107,7 +120,6 @@ void Passfault::SecureString::zero() {
 void Passfault::SecureString::zero ( std::string & str ) {
     this->zero((char*)str.c_str(), str.size());
 }
-
 
 // TODO: Determine if this is necessary, if it works, and if O0 instead of O1 or O2 is needed
 // Disable optimizations to ensure that the zeroing actually occurs

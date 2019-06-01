@@ -7,12 +7,13 @@
 
 #include <string>
 #include <cstring>
+#include <stdexcept>
 
 namespace Passfault {
 
     /**
      * This is a string whose destructor 0's out the data upon clear or destructor
-     * @author Ranind
+     * @author Chris Henk @LittleBoxOfSunshine
      */
     class SecureString {
     private:
@@ -45,6 +46,11 @@ namespace Passfault {
         SecureString();
 
         /**
+         * Disallow implicit conversion from cstring
+         */
+         SecureString(const char *) = delete;
+
+        /**
          * Construct a secure string from an existing string. This process is destructive,
          * the given string will be securely destroyed to increase security
          * @param chars the string pointer to become a SecureString
@@ -69,14 +75,24 @@ namespace Passfault {
          * Construct a secure string from a substring of an existing secure string. This
          * procress is NOT destructive, it is intended to be used in the substring
          * function, which functions as a convenient alias for this constructor.
+         * @param secureString the secure string to deep copy substring from
+         * @param start the starting position of the substring to copy
+         * @param length the length of the substring to copy
+         * @return a deep copy of the substring as a SecureString object
+         * @throw out_of_range If start position is greater than the string length
          */
-        SecureString ( const SecureString & secureString, size_t start, size_t end );
+        SecureString ( const SecureString & secureString, size_t start, size_t length );
 
         /**
          * @param index of the character to return
          * @return the index-th (nth) character of the string
          */
         char& operator[] ( size_t index );
+        /**
+         * @param index of the character to return
+         * @return the index-th (nth) character of the string
+         */
+        const char& operator[] ( size_t index ) const;
 
         /**
          * @return the length of the string
@@ -88,7 +104,7 @@ namespace Passfault {
          * @param end the index to end the substring (not inclusive)
          * @return the substring from start to end (not inclusive)
          */
-        SecureString substr ( size_t start, size_t end );
+        SecureString substr ( size_t start, size_t end ) const;
 
         /**
          * Securely clears the string by overwriting all data with 0's.
@@ -102,6 +118,27 @@ namespace Passfault {
          * @param rhs the secure string to clone
          */
         SecureString & operator= ( const SecureString & rhs );
+
+        /**
+         * Overloaded equality operator
+         * @param rhs the secure string to check against for equality
+         * @return the result of the equality comparison
+         */
+        bool operator== ( const SecureString & rhs ) const;
+
+        /**
+         * Overloaded equality operator, convenience function for unit testing
+         * @param rhs the string to check against for equality
+         * @return the result of the equality comparison
+         */
+        bool operator== ( const std::string & rhs ) const;
+
+        /**
+         * Overloaded equality operator, convenience function for unit testing
+         * @param rhs the cstring to check against for equality
+         * @return the result of the equality comparison
+         */
+        bool operator== ( const char * rhs ) const;
 
         /**
          * Uses the clear function to securely erase its data
