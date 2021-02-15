@@ -10,5 +10,5 @@ enable_testing()
 # add_custom_target(doc)
 # ADD_DEPENDENCIES(doc )
 
-add_subdirectory(libpassfault)
+add_subdirectory(libpassometer)
 #add_subdirectory(cli)

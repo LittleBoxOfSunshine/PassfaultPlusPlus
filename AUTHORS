@@ -1,6 +1,6 @@
 Inspired by OWASP Passfault, which was written by Cam Morris (github user: c-a-m)
 
-Written by Chris Henk. Copyright (c) 2016-2018
+Written by Chris Henk. Copyright (c) 2016-2021
 
 Contributions By:
     [Help Wanted! Contact @LittleBoxOfSunshine for details.]
@@ -11,9 +11,6 @@ Beta Testers:
 Core Projects Maintained By:
     LibPassfault    - Chris Henk
     CLI             - [Help Wanted! Contact @LittleBoxOfSunshine for details.]
-    Dameon          - [Help Wanted! Contact @LittleBoxOfSunshine for details.]
-    DEB Packaging   - [Help Wanted! Contact @LittleBoxOfSunshine for details.]
-    RPM Packaging   - [Help Wanted! Contact @LittleBoxOfSunshine for details.]
 
 Bindings Maintained By:
     PHP             - [Help Wanted! Contact @LittleBoxOfSunshine for details.]
